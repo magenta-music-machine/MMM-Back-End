@@ -1,0 +1,19 @@
+{
+  "name": "magenta-back-end",
+  "version": "1.0.0",
+  "description": "back end for 301 project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/TEAM-MAGENTA-Project/TEAM-MAGENTA-Group-Project-Back-End.git"
+  },
+  "author": "Adrian Cosme-Halverson, Alfredo Orquiz, David Lee, Jordan Yamada",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/TEAM-MAGENTA-Project/TEAM-MAGENTA-Group-Project-Back-End/issues"
+  },
+  "homepage": "https://github.com/TEAM-MAGENTA-Project/TEAM-MAGENTA-Group-Project-Back-End#readme"
+}
