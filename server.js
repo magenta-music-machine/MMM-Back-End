@@ -1,15 +1,28 @@
 'use strict';
 
-const express = require('express');
-
 require('dotenv').config();
-
+const express = require('express');
 const cors = require('cors');
+const mongoose = require('mongoose');
 
+// import our Song and Score schemas, so we can interact with
+const Song = require('./models/songs.js');
+const Score = require('./models/scores.js');
+
+// add validation to confirm we are wired up to our mongo DB
+const db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+  console.log('Mongoose is listening');
+});
+
+//connect mongoose to mongo
+mongoose.connect(process.env.DB_URL);
+
+//USE
 const app = express();
-
 app.use(cors());
-
+app.use(express.json());
 const PORT = process.env.PORT || 3002;
 
 
