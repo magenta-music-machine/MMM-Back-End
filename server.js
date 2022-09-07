@@ -4,6 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
+// const verifyUser = require('./auth');
 
 // import our Song and Score schemas, so we can interact with
 const Song = require('./models/songs.js');
@@ -35,6 +36,18 @@ app.get('/', (req,res) => {
 app.get('*', (request, response) => {
   response.send('Route does not exists.');
 });
+
+
+// verifyUser Request will go into the one of the functions on aysnc function handleMusic or something
+
+// verifyUser(req, async, (err, user)) => {
+//   if (err) {
+//     console.log(err);
+//     res.send('invalid token');
+//   } else {
+
+//   }
+// }
 
 
 // Error Handling Here
