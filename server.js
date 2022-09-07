@@ -10,7 +10,7 @@ const musicHandler = require('./musicAPI.js');
 
 // import our Song and Score schemas, so we can interact with
 const Song = require('./models/songs.js');
-const Score = require('./models/scores.js');
+const Score = require('./models/score.js');
 
 // add validation to confirm we are wired up to our mongo DB
 const db = mongoose.connection;
@@ -36,6 +36,96 @@ app.get('/', (req,res) => {
 
 
 app.get('/music', musicHandler);
+app.get('/songs', getSong);
+app.get('/score', getScore);
+app.post('/songs', postSong);
+app.post('/score', postScore);
+app.put('/songs/:id', putSong);
+app.put('/score/:id', putScore);
+app.delete('/songs/:id', deleteSong);
+
+
+
+async function getSong(request, response, next) {
+  try {
+    let results = await Song.find({});
+    response.status(200).send(results);
+  }
+  catch (e) {
+    next(e);
+  }
+}
+
+async function getScore(request, response, next) {
+  try {
+    let results = await Score.find({});
+    response.status(200).send(results);
+  }
+  catch (e) {
+    next(e);
+  }
+}
+
+async function postScore(request, response, next) {
+  try {
+    let createdScore = await Score.create(request.body);
+    response.status(200).send(createdScore);
+  } catch (e) {
+    next(e);
+  }
+}
+
+async function postSong(request, response, next) {
+  try {
+    let createdSong = await Song.create(request.body);
+    response.status(200).send(createdSong);
+  } catch (e) {
+    next(e);
+  }
+}
+
+async function putSong(request, response, next)
+  {
+    try
+    {
+      // access the `id` in params
+      let id = request.params.id;
+      let updatedSong = await Song.findByIdAndUpdate(id, request.body, { new: true, overwrite: true});
+      response.status(200).send(updatedSong);
+    }
+    catch (e)
+    {
+      next(e);
+    }
+  }
+
+  async function putScore(request, response, next)
+  {
+    try
+    {
+      // access the `id` in params
+      let id = request.params.id;
+      let updatedScore = await Score.findByIdAndUpdate(id, request.body, { new: true, overwrite: true});
+      response.status(200).send(updatedScore);
+    }
+    catch (e)
+    {
+      next(e);
+    }
+  }
+
+  async function deleteSong(request, response, next) {
+    try {
+      await Song.findByIdAndDelete(request.params.id);
+      response.status(200).send('Deleted song');
+    }
+    catch (e) {
+  
+      next(e);
+    }
+  }
+
+
 
 app.get('*', (request, response) => {
   response.send('Route does not exists.');
