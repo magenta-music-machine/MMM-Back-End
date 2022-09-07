@@ -5,6 +5,8 @@ const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 
+const musicHandler = require('./musicAPI.js');
+
 // import our Song and Score schemas, so we can interact with
 const Song = require('./models/songs.js');
 const Score = require('./models/scores.js');
@@ -31,6 +33,8 @@ app.get('/', (req,res) => {
   res.send('hello');
 });
 
+
+app.get('/music', musicHandler);
 
 app.get('*', (request, response) => {
   response.send('Route does not exists.');
