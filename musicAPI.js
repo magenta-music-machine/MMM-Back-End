@@ -23,6 +23,7 @@ async function getMusic (request, response, next) {
       data: selectedCity,
       timestamp: Date.now(),
     };
+
     response.status(200).send(selectedCity);
   }
   } catch(err) {
@@ -36,9 +37,8 @@ class Music {
     this.title = music.name;
     this.artistName = music.artistName;
     this.previewURL = music.previewURL;
-    this.isExplicit=music.isExplicit;
     this.id = music.id;
-
+    this.isExplicit = music.isExplicit;
   }
 }
 
