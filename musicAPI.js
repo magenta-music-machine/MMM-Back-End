@@ -12,6 +12,7 @@ async function getMusic (request, response, next) {
       console.log('It\'s in the cache!');
       response.status(200).send(cache.data);
 
+
     } else {
       console.log('It\'s not in the cache, so let\'s cache it!');
     let url = `http://api.napster.com/v2.2/tracks/top?apikey=${process.env.MUSIC_API_KEY}&limit=100`;
