@@ -4,7 +4,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-// const verifyUser = require('./auth');
+const verifyUser = require('./auth');
 
 const musicHandler = require('./musicAPI.js');
 
@@ -47,6 +47,11 @@ app.delete('/songs/:id', deleteSong);
 
 
 async function getSong(request, response, next) {
+  verifyUser(request, async (err, user) => {
+    if (err) {
+      console.log(err);
+      response.send('invalid token');
+    } else {
   try {
     let results = await Song.find({});
     response.status(200).send(results);
@@ -55,6 +60,8 @@ async function getSong(request, response, next) {
     next(e);
   }
 }
+})
+  }
 
 async function getScore(request, response, next) {
   try {
@@ -153,3 +160,4 @@ app.use((err, req, res, next) => {
 
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
+

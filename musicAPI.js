@@ -11,7 +11,7 @@ async function getMusic (request, response, next) {
     // let cacheTest = 1000 * 20;
     if (cache[key] && Date.now() - cache[key].timestamp < timeToCache) {
       console.log('It\'s in the cache!');
-      res.status(200).send(cache[key].data);
+      response.status(200).send(cache[key].data);
 
     } else {
       console.log('It\'s not in the cache, so let\'s cache it!');
