@@ -11,8 +11,9 @@ const songSchema = new Schema({
 
   title: {type: String, required: true},
   artist: {type: String, required: true},
-  email: {type: String, required: true}
-
+  email: {type: String, required: true},
+  albumId: {type:String, required: true},
+  albumName: {type:String, required: true},
 });
 
 // define the model
