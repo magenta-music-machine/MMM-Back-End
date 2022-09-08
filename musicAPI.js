@@ -39,6 +39,8 @@ class Music {
     this.previewURL = music.previewURL;
     this.id = music.id;
     this.isExplicit = music.isExplicit;
+    this.albumId = music.albumId;
+    this.albumName = music.albumName;
   }
 }
 
