@@ -11,6 +11,7 @@ const musicHandler = require('./musicAPI.js');
 // import our Song and Score schemas, so we can interact with
 const Song = require('./models/songs.js');
 const Score = require('./models/score.js');
+const { default: axios } = require('axios');
 
 // add validation to confirm we are wired up to our mongo DB
 const db = mongoose.connection;
@@ -38,11 +39,13 @@ app.get('/', (req,res) => {
 app.get('/music', musicHandler);
 app.get('/songs', getSong);
 app.get('/score', getScore);
+app.get('/albums', getAlbum);
 app.post('/songs', postSong);
 app.post('/score', postScore);
 app.put('/songs/:id', putSong);
 app.put('/score/:id', putScore);
 app.delete('/songs/:id', deleteSong);
+
 
 
 
@@ -132,6 +135,18 @@ async function putSong(request, response, next)
     }
   }
 
+  async function getAlbum(request, response, next){
+    try{
+      let id = request.query.albumId;
+      let art = await axios.get(`http://api.napster.com/v2.2/albums/${id}/images?apikey=${process.env.MUSIC_API_KEY}`);
+    console.log('rats');
+      response.send(art);
+      console.log('rats')
+    } catch (e){
+      console.log('Rats')
+      next(e);
+    }
+  }
 
 
 app.get('*', (request, response) => {
