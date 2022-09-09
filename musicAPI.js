@@ -18,7 +18,6 @@ async function getMusic (request, response, next) {
       console.log('It\'s not in the cache, so let\'s cache it!');
     let url = `http://api.napster.com/v2.2/tracks/top?apikey=${process.env.MUSIC_API_KEY}&limit=100`;
     let musicObj = await axios.get(url);
-    console.log(musicObj.data);
     let selectedCity = musicObj.data.tracks.map(music => new Music(music));
     cache = {
       data: selectedCity,
