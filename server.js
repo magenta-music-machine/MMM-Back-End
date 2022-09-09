@@ -137,9 +137,9 @@ async function putSong(request, response, next)
 
   async function getAlbum(request, response, next){
     try{
-      let id = request.query.albumId
+      let id = request.query.albumId;
       let art = await axios.get(`http://api.napster.com/v2.2/albums/${id}/images?apikey=${process.env.MUSIC_API_KEY}`);
-    
+    console.log('rats');
       response.send(art);
       console.log('rats')
     } catch (e){
